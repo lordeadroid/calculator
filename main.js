@@ -39,6 +39,12 @@ const main = () => {
   onkeydown = (event) => {
     const query = screen.innerText;
 
+    if (event.code === "Backspace") {
+      const newQuery = query.slice(0, -1);
+      screen.innerText = newQuery;
+      return;
+    }
+
     if (event.code.includes("Digit")) {
       const newQuery = query + event.key;
       screen.innerText = newQuery;
