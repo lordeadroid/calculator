@@ -14,7 +14,7 @@ class Controller {
     this.#input = "";
   }
 
-  #render() {
+  #renderInput() {
     this.#view.renderInput(this.#input);
   }
 
@@ -32,24 +32,26 @@ class Controller {
       this.#result = result;
       this.#renderResult();
     } catch (error) {
-      this.#renderError("Wrong Input");
+      this.#renderError("Error Evaluting Expression");
     }
   }
 
   #deleteInput() {
     const newInput = this.#input.slice(0, -1);
     this.#input = newInput;
-    this.#render();
+    this.#renderInput();
   }
 
   #clearInput() {
     this.#input = "";
-    this.#render();
+    this.#result = "";
+    this.#renderInput();
+    this.#renderResult();
   }
 
   #display(newInput) {
     this.#input += newInput;
-    this.#render();
+    this.#renderInput();
   }
 
   start() {
@@ -69,6 +71,6 @@ class Controller {
 
     this.#mouseController.start();
     this.#keyboardController.start();
-    this.#render();
+    this.#renderInput();
   }
 }
