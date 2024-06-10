@@ -13,13 +13,18 @@ const ATTRIBUTES = {
 
 const createElement = (element) => document.createElement(element);
 const selectElement = (element) => document.querySelector(element);
+const selectElements = (element) => document.querySelectorAll(element);
 
 const main = () => {
   const screen = selectElement(".screen");
+  const numbers = selectElements(".number");
 
   const view = new View(screen);
-  const controller = new KeyboardController(view);
-  controller.start();
+  const keyboardController = new KeyboardController(view);
+  const mouseController = new MouseController(view, numbers);
+
+  keyboardController.start();
+  mouseController.start();
 };
 
 window.onload = main;

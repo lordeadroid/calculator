@@ -54,3 +54,29 @@ class KeyboardController {
     this.#onKeyDown();
   }
 }
+
+class MouseController {
+  #view;
+  #numbers;
+  #query;
+
+  constructor(view, numbers) {
+    this.#view = view;
+    this.#numbers = Array.from(numbers);
+    this.#query = "";
+  }
+
+  #onClick() {
+    this.#numbers.forEach((element) => {
+      element.onclick = (event) => {
+        const value = event.target.innerText;
+        this.#query += value;
+        this.#view.render(this.#query);
+      };
+    });
+  }
+
+  start() {
+    this.#onClick();
+  }
+}
