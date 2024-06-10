@@ -15,13 +15,22 @@ const createElement = (element) => document.createElement(element);
 const selectElement = (element) => document.querySelector(element);
 const selectElements = (element) => document.querySelectorAll(element);
 
+const getElements = () => {
+  const numbers = selectElements(".number");
+  const enterKey = selectElement(".enter");
+  const clearKey = selectElement(".clear");
+  const deleteKey = selectElement(".delete");
+  const operators = selectElements(".operator");
+
+  return { numbers, enterKey, clearKey, deleteKey, operators };
+};
+
 const main = () => {
   const screen = selectElement(".screen");
-  const numbers = selectElements(".number");
-  const deleteKey = selectElement(".delete");
+  const elements = getElements();
 
   const view = new View(screen);
-  const controller = new Controller(view, numbers, deleteKey);
+  const controller = new Controller(view, elements);
   controller.start();
 };
 
