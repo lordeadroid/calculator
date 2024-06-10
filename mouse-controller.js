@@ -5,16 +5,20 @@ class MouseController {
   #deleteKey;
   #evaluate;
   #enterKey;
+  #clearKey;
+  #clearInput;
   #operators;
 
-  constructor(elements, display, deleteInput, evaluate) {
+  constructor(elements, display, deleteInput, evaluate, clearInput) {
     this.#numbers = Array.from(elements.numbers);
     this.#deleteKey = elements.deleteKey;
     this.#enterKey = elements.enterKey;
+    this.#clearKey = elements.clearKey;
     this.#operators = elements.operators;
     this.#display = display;
     this.#deleteInput = deleteInput;
     this.#evaluate = evaluate;
+    this.#clearInput = clearInput;
   }
 
   #onClick() {
@@ -34,6 +38,10 @@ class MouseController {
 
     this.#deleteKey.onclick = () => {
       this.#deleteInput();
+    };
+
+    this.#clearKey.onclick = () => {
+      this.#clearInput();
     };
 
     this.#enterKey.onclick = () => {

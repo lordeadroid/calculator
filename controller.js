@@ -29,6 +29,11 @@ class Controller {
     this.#render();
   }
 
+  #clearInput() {
+    this.#input = "";
+    this.#render();
+  }
+
   #display(newInput) {
     this.#input += newInput;
     this.#render();
@@ -39,7 +44,8 @@ class Controller {
       this.#elements,
       (input) => this.#display(input),
       () => this.#deleteInput(),
-      () => this.#evaluate()
+      () => this.#evaluate(),
+      () => this.#clearInput()
     );
 
     this.#keyboardController = new KeyboardController(
@@ -50,5 +56,6 @@ class Controller {
 
     this.#mouseController.start();
     this.#keyboardController.start();
+    this.#render();
   }
 }
