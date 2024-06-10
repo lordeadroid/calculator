@@ -4,10 +4,12 @@ class Controller {
 
   #input;
   #result;
-  #mouseController;
-  #keyboardController;
+  #MouseController;
+  #KeyboardController;
 
-  constructor(view, elements) {
+  constructor(MouseController, KeyboardController, view, elements) {
+    this.#MouseController = MouseController;
+    this.#KeyboardController = KeyboardController;
     this.#view = view;
     this.#elements = elements;
 
@@ -55,7 +57,7 @@ class Controller {
   }
 
   start() {
-    this.#mouseController = new MouseController(
+    const mouseController = new this.#MouseController(
       this.#elements,
       (input) => this.#display(input),
       () => this.#deleteInput(),
@@ -63,15 +65,15 @@ class Controller {
       () => this.#clearScreen()
     );
 
-    this.#keyboardController = new KeyboardController(
+    const keyboardController = new this.#KeyboardController(
       (input) => this.#display(input),
       () => this.#deleteInput(),
       () => this.#evaluate(),
       () => this.#clearScreen()
     );
 
-    this.#mouseController.start();
-    this.#keyboardController.start();
+    mouseController.start();
+    keyboardController.start();
     this.#renderInput();
   }
 }

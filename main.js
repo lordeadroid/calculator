@@ -30,7 +30,12 @@ const main = () => {
   const elements = getElements();
 
   const view = new View(input, result);
-  const controller = new Controller(view, elements);
+  const controller = new Controller(
+    MouseController,
+    KeyboardController,
+    view,
+    elements
+  );
   controller.start();
 };
 
