@@ -42,7 +42,7 @@ class Controller {
     this.#renderInput();
   }
 
-  #clearInput() {
+  #clearScreen() {
     this.#input = "";
     this.#result = "";
     this.#renderInput();
@@ -60,13 +60,14 @@ class Controller {
       (input) => this.#display(input),
       () => this.#deleteInput(),
       () => this.#evaluate(),
-      () => this.#clearInput()
+      () => this.#clearScreen()
     );
 
     this.#keyboardController = new KeyboardController(
       (input) => this.#display(input),
       () => this.#deleteInput(),
-      () => this.#evaluate()
+      () => this.#evaluate(),
+      () => this.#clearScreen()
     );
 
     this.#mouseController.start();
