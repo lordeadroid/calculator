@@ -71,11 +71,11 @@ body {
     border: 1px solid black;
     border-radius: 0.75rem;
     background-color: var(--key-color);
-    transition: height 1s ease, width 1s ease;
+    transition: margin 1s;
   }
 
   & > div:active {
-    transform: scale(0.9);
+    margin: 0.5rem;
   }
 }
 
