@@ -18,9 +18,10 @@ const selectElements = (element) => document.querySelectorAll(element);
 const main = () => {
   const screen = selectElement(".screen");
   const numbers = selectElements(".number");
+  const deleteKey = selectElement(".delete");
 
   const view = new View(screen);
-  const controller = new Controller(view, numbers);
+  const controller = new Controller(view, numbers, deleteKey);
   controller.start();
 };
 

@@ -5,9 +5,11 @@ class KeyboardController {
   #validNumberKeys;
   #validOperationKeys;
   #validKeyCodes;
+  #deleteInput;
 
-  constructor(display) {
+  constructor(display, deleteInput) {
     this.#display = display;
+    this.#deleteInput = deleteInput;
     this.#validNumberKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
     this.#validOperationKeys = ["+", "-", "*", "/"];
     this.#validKeyCodes = [
@@ -34,9 +36,7 @@ class KeyboardController {
       }
 
       if (key === "Backspace") {
-        const newQuery = this.#query.slice(0, -1);
-        this.#query = newQuery;
-        this.#calcView.render(this.#query);
+        this.#deleteInput();
         return;
       }
 
@@ -54,14 +54,16 @@ class KeyboardController {
 }
 
 class MouseController {
-  #view;
-  #numbers;
-  #query;
   #display;
+  #deleteInput;
+  #numbers;
+  #deleteKey;
 
-  constructor(display, numbers) {
+  constructor(display, deleteInput, numbers, deleteKey) {
     this.#display = display;
+    this.#deleteInput = deleteInput;
     this.#numbers = Array.from(numbers);
+    this.#deleteKey = deleteKey;
   }
 
   #onClick() {
@@ -71,6 +73,10 @@ class MouseController {
         this.#display(input);
       };
     });
+
+    this.#deleteKey.onclick = () => {
+      this.#deleteInput();
+    };
   }
 
   start() {
@@ -81,30 +87,45 @@ class MouseController {
 class Controller {
   #view;
   #numberElements;
+  #deleteKey;
 
   #input;
   #mouseController;
   #keyboardController;
 
-  constructor(view, numberElements) {
-    this.#numberElements = numberElements;
+  constructor(view, numberElements, deleteKey) {
     this.#view = view;
+    this.#numberElements = numberElements;
+    this.#deleteKey = deleteKey;
 
     this.#input = "";
   }
 
+  #render() {
+    this.#view.render(this.#input);
+  }
+
+  #deleteInput() {
+    const newInput = this.#input.slice(0, -1);
+    this.#input = newInput;
+    this.#render();
+  }
+
   #display(newInput) {
     this.#input += newInput;
-    this.#view.render(this.#input);
+    this.#render();
   }
 
   start() {
     this.#mouseController = new MouseController(
       (input) => this.#display(input),
-      this.#numberElements
+      () => this.#deleteInput(),
+      this.#numberElements,
+      this.#deleteKey
     );
-    this.#keyboardController = new KeyboardController((input) =>
-      this.#display(input)
+    this.#keyboardController = new KeyboardController(
+      (input) => this.#display(input),
+      () => this.#deleteInput()
     );
 
     this.#mouseController.start();
