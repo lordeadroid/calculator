@@ -41,7 +41,9 @@ class Controller {
   #deleteInput() {
     const newInput = this.#input.slice(0, -1);
     this.#input = newInput;
+    this.#result = "";
     this.#renderInput();
+    this.#renderResult();
   }
 
   #clearScreen() {

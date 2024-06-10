@@ -72,7 +72,7 @@ body {
     border-radius: 0.75rem;
     background-color: var(--key-color);
     transition: margin 1s;
-    box-shadow: 0 0 0.5rem black, inset 0 0 3rem black;
+    box-shadow: 0 0 0.25rem black, inset 0 0 3rem black;
   }
 
   & > div:active {
