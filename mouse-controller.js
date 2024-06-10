@@ -5,11 +5,13 @@ class MouseController {
   #deleteKey;
   #evaluate;
   #enterKey;
+  #operators;
 
   constructor(elements, display, deleteInput, evaluate) {
     this.#numbers = Array.from(elements.numbers);
     this.#deleteKey = elements.deleteKey;
     this.#enterKey = elements.enterKey;
+    this.#operators = elements.operators;
     this.#display = display;
     this.#deleteInput = deleteInput;
     this.#evaluate = evaluate;
@@ -17,6 +19,13 @@ class MouseController {
 
   #onClick() {
     this.#numbers.forEach((element) => {
+      element.onclick = (event) => {
+        const input = event.target.innerText;
+        this.#display(input);
+      };
+    });
+
+    this.#operators.forEach((element) => {
       element.onclick = (event) => {
         const input = event.target.innerText;
         this.#display(input);
