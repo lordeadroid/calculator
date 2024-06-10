@@ -1,11 +1,17 @@
 class View {
-  #screen;
+  #input;
+  #result;
 
-  constructor(screen) {
-    this.#screen = screen;
+  constructor(input, result) {
+    this.#input = input;
+    this.#result = result;
   }
 
-  render(query) {
-    this.#screen.innerText = query;
+  renderInput(input) {
+    this.#input.innerText = input;
+  }
+
+  render(result) {
+    this.#result.innerText = result;
   }
 }

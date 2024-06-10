@@ -3,6 +3,7 @@ class Controller {
   #elements;
 
   #input;
+  #result;
   #mouseController;
   #keyboardController;
 
@@ -14,13 +15,25 @@ class Controller {
   }
 
   #render() {
-    this.#view.render(this.#input);
+    this.#view.renderInput(this.#input);
+  }
+
+  #renderResult() {
+    this.#view.render(this.#result);
+  }
+
+  #renderError(message) {
+    this.#view.render(message);
   }
 
   #evaluate() {
-    const result = eval(this.#input);
-    this.#input = result;
-    this.#render();
+    try {
+      const result = eval(this.#input);
+      this.#result = result;
+      this.#renderResult();
+    } catch (error) {
+      this.#renderError("Wrong Input");
+    }
   }
 
   #deleteInput() {

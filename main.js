@@ -11,7 +11,6 @@ const ATTRIBUTES = {
   ALT: "alt",
 };
 
-const createElement = (element) => document.createElement(element);
 const selectElement = (element) => document.querySelector(element);
 const selectElements = (element) => document.querySelectorAll(element);
 
@@ -26,10 +25,11 @@ const getElements = () => {
 };
 
 const main = () => {
-  const screen = selectElement(".screen");
+  const input = selectElement(".input");
+  const result = selectElement(".result");
   const elements = getElements();
 
-  const view = new View(screen);
+  const view = new View(input, result);
   const controller = new Controller(view, elements);
   controller.start();
 };
