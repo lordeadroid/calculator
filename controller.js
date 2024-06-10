@@ -1,13 +1,13 @@
 class KeyboardController {
   #calcView;
   #query;
+  #display;
   #validNumberKeys;
   #validOperationKeys;
   #validKeyCodes;
 
-  constructor(calcView) {
-    this.#calcView = calcView;
-    this.#query = "";
+  constructor(display) {
+    this.#display = display;
     this.#validNumberKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
     this.#validOperationKeys = ["+", "-", "*", "/"];
     this.#validKeyCodes = [
@@ -29,9 +29,7 @@ class KeyboardController {
       const key = event.key;
 
       if (this.#isValidKey(key)) {
-        const newQuery = this.#query + key;
-        this.#query = newQuery;
-        this.#calcView.render(this.#query);
+        this.#display(key);
         return;
       }
 
@@ -59,24 +57,57 @@ class MouseController {
   #view;
   #numbers;
   #query;
+  #display;
 
-  constructor(view, numbers) {
-    this.#view = view;
+  constructor(display, numbers) {
+    this.#display = display;
     this.#numbers = Array.from(numbers);
-    this.#query = "";
   }
 
   #onClick() {
     this.#numbers.forEach((element) => {
       element.onclick = (event) => {
-        const value = event.target.innerText;
-        this.#query += value;
-        this.#view.render(this.#query);
+        const input = event.target.innerText;
+        this.#display(input);
       };
     });
   }
 
   start() {
     this.#onClick();
+  }
+}
+
+class Controller {
+  #view;
+  #numberElements;
+
+  #input;
+  #mouseController;
+  #keyboardController;
+
+  constructor(view, numberElements) {
+    this.#numberElements = numberElements;
+    this.#view = view;
+
+    this.#input = "";
+  }
+
+  #display(newInput) {
+    this.#input += newInput;
+    this.#view.render(this.#input);
+  }
+
+  start() {
+    this.#mouseController = new MouseController(
+      (input) => this.#display(input),
+      this.#numberElements
+    );
+    this.#keyboardController = new KeyboardController((input) =>
+      this.#display(input)
+    );
+
+    this.#mouseController.start();
+    this.#keyboardController.start();
   }
 }

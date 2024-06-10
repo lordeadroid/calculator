@@ -20,11 +20,8 @@ const main = () => {
   const numbers = selectElements(".number");
 
   const view = new View(screen);
-  const keyboardController = new KeyboardController(view);
-  const mouseController = new MouseController(view, numbers);
-
-  keyboardController.start();
-  mouseController.start();
+  const controller = new Controller(view, numbers);
+  controller.start();
 };
 
 window.onload = main;
