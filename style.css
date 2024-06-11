@@ -114,4 +114,5 @@ body {
 
 .blur {
   filter: blur(0.25rem);
+  pointer-events: none;
 }
