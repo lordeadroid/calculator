@@ -6,6 +6,8 @@ class KeyboardController {
   #deleteInput;
   #evaluate;
   #clearScreen;
+  #evaluationKeys;
+  #backspaceKey;
 
   constructor(display, deleteInput, evaluate, clearScreen) {
     this.#display = display;
@@ -14,6 +16,8 @@ class KeyboardController {
     this.#clearScreen = clearScreen;
     this.#validNumberKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
     this.#validOperationKeys = ["+", "-", "*", "/", "(", ")"];
+    this.#evaluationKeys = ["=", "Enter"];
+    this.#backspaceKey = "Backspace";
     this.#validKeyCodes = [
       ...this.#validNumberKeys,
       ...this.#validOperationKeys,
@@ -21,11 +25,15 @@ class KeyboardController {
   }
 
   #isValidKey(keyValue) {
-    if (this.#validKeyCodes.includes(keyValue)) {
-      return true;
-    }
+    return this.#validKeyCodes.includes(keyValue);
+  }
 
-    return false;
+  #isEvaluationKey(keyValue) {
+    return this.#evaluationKeys.includes(keyValue);
+  }
+
+  #isBackspaceKey(keyValue) {
+    return keyValue === this.#backspaceKey;
   }
 
   #onKeyDown() {
@@ -40,17 +48,15 @@ class KeyboardController {
       }
 
       if (this.#isValidKey(key)) {
-        this.#display(key);
-        return;
+        return this.#display(key);
       }
 
-      if (key === "Backspace") {
-        this.#deleteInput();
-        return;
+      if (this.#backspaceKey(key)) {
+        return this.#deleteInput();
       }
 
-      if (key === "=" || key === "Enter") {
-        this.#evaluate();
+      if (this.#isEvaluationKey(key)) {
+        return this.#evaluate();
       }
     };
   }
