@@ -94,15 +94,16 @@ body {
   top: 0rem;
   left: 0rem;
   cursor: pointer;
-  transition: all 250ms;
+  transition: all 500ms ease-in;
   width: 5rem;
   height: 5rem;
 
   & > div {
     color: black;
-    padding: 2rem;
-    margin-top: 2.5rem;
+    padding-left: 2.5rem;
+    margin-top: 3.5rem;
     line-height: 1.25;
+    font-size: 1.25rem;
   }
 }
 
