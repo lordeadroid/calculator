@@ -91,19 +91,21 @@ body {
 
 .help-section {
   position: absolute;
-  right: 0rem;
   top: 0rem;
+  left: 0rem;
   cursor: pointer;
-  transition: width 40s ease-in;
+  transition: width 200ms ease-in;
+  width: 5rem;
+  height: 100vh;
 
   & > img {
     width: 4rem;
   }
 
   & > div {
-    width: 25rem;
     color: black;
-    padding: 1.5rem;
+    padding: 2rem;
+    margin-top: 2.5rem;
     line-height: 1.25;
   }
 }

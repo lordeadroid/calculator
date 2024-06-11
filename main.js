@@ -36,12 +36,16 @@ const createHelpSection = () => {
       clicked = true;
       instructionsDiv.classList.remove("hidden");
       calculator.classList.add("blur");
+      helpSection.style.width = "25rem";
+      helpSection.style.backgroundColor = "aliceblue";
       return;
     }
 
     clicked = false;
     instructionsDiv.classList.add("hidden");
     calculator.classList.remove("blur");
+    helpSection.style.width = "5rem";
+    helpSection.style.backgroundColor = "white";
   };
 };
 
