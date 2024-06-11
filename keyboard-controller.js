@@ -51,7 +51,7 @@ class KeyboardController {
         return this.#display(key);
       }
 
-      if (this.#backspaceKey(key)) {
+      if (this.#isBackspaceKey(key)) {
         return this.#deleteInput();
       }
 
