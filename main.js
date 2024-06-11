@@ -37,6 +37,7 @@ const createHelpSection = () => {
       instructionsDiv.classList.remove("hidden");
       calculator.classList.add("blur");
       helpSection.style.width = "25rem";
+      helpSection.style.height = "100vh";
       helpSection.style.backgroundColor = "aliceblue";
       return;
     }
@@ -45,7 +46,8 @@ const createHelpSection = () => {
     instructionsDiv.classList.add("hidden");
     calculator.classList.remove("blur");
     helpSection.style.width = "5rem";
-    helpSection.style.backgroundColor = "white";
+    helpSection.style.height = "5rem";
+    helpSection.style.backgroundColor = "";
   };
 };
 

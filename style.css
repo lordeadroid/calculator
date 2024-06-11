@@ -94,13 +94,9 @@ body {
   top: 0rem;
   left: 0rem;
   cursor: pointer;
-  transition: width 200ms ease-in;
+  transition: all 250ms;
   width: 5rem;
-  height: 100vh;
-
-  & > img {
-    width: 4rem;
-  }
+  height: 5rem;
 
   & > div {
     color: black;

@@ -76,6 +76,5 @@ class Controller {
 
     mouseController.start();
     keyboardController.start();
-    this.#renderInput();
   }
 }
